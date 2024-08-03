@@ -8,7 +8,7 @@
 - My main language is `C#` and `F#`.
 - I mainly use `AWS` in my work,
   and I'm currently study `Azure`.
-- How to reach me: [Twitter - @phasetrbot](https://twitter.com/username)
+- How to reach me: [Twitter - @phasetr2](https://x.com/phasetr2)
 
 <!-- アイコンの選択肢一覧：
 https://arc.net/l/quote/zizyykfh -->
