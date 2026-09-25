@@ -16,6 +16,23 @@ jobs:
   metrics:
     runs-on: ubuntu-latest
     steps:
+      # lowlighter/metrics retries a 401 with a 5-minute delay, so a bad token burns ~15 minutes per step before failing.
+      - name: Verify METRICS_TOKEN
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          if [ -z "$METRICS_TOKEN" ]; then
+            echo "::error::METRICS_TOKEN is not set"
+            exit 1
+          fi
+          status=$(curl -sS -o /dev/null -w '%{http_code}' \
+            -H "Authorization: token $METRICS_TOKEN" \
+            https://api.github.com/user)
+          if [ "$status" != "200" ]; then
+            echo "::error::METRICS_TOKEN authentication failed (HTTP $status)"
+            exit 1
+          fi
+
       - name: Base stats
         uses: lowlighter/metrics@latest
         with:
